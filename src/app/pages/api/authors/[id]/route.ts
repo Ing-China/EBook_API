@@ -32,7 +32,26 @@ export async function PUT(
     }
 
     // Prepare the update author object
-    const updateAuthor = {
+    // const updateAuthor = {
+    //   name: formData.get("name"),
+    //   age: formData.get("age"),
+    //   bookCount: formData.get("bookCount"),
+    //   bio: formData.get("bio"),
+    //   isActive: formData.get("isActive") === "true" ? true : false,
+    //   bookType: bookType
+    //     ? new mongoose.Types.ObjectId(bookType.toString())
+    //     : undefined,
+    // };
+
+    const updateAuthor: {
+      name: FormDataEntryValue | null;
+      age: FormDataEntryValue | null;
+      bookCount: FormDataEntryValue | null;
+      bio: FormDataEntryValue | null;
+      isActive: boolean;
+      bookType?: mongoose.Types.ObjectId;
+      image?: string; // Declaring image as optional
+    } = {
       name: formData.get("name"),
       age: formData.get("age"),
       bookCount: formData.get("bookCount"),
@@ -44,7 +63,7 @@ export async function PUT(
     };
 
     // Handle image upload if provided
-    const image = formData.get("image");
+    const image = formData.get("image") as File;
     if (image) {
       const buffer = Buffer.from(await image.arrayBuffer());
       const filename = image.name.replace(/ /g, "_");
