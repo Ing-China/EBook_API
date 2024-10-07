@@ -72,9 +72,15 @@ export async function POST(request: Request) {
 
     await writeFile(filePath, buffer);
 
-    const imageUrl = `http://${request.headers.get(
-      "host"
-    )}/uploads/images/${filename}`;
+    // const imageUrl = `http://${request.headers.get(
+    //   "host"
+    // )}/uploads/images/${filename}`;
+
+    const baseUrl =
+      process.env.NEXT_PUBLIC_API_BASE_URL ||
+      `http://${request.headers.get("host")}`;
+
+    const imageUrl = `${baseUrl}/uploads/images/${filename}`;
 
     const newAuthor = new Author({
       name,
