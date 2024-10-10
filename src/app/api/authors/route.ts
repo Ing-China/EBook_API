@@ -4,10 +4,13 @@ import { NextResponse } from "next/server";
 import path from "path";
 import { writeFile } from "fs/promises";
 import mongoose from "mongoose";
+import BookType from "@/models/BookType";
 
 export async function GET(request: Request) {
   try {
     await connectDB();
+
+    const bookTypes = await BookType.find();
 
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));

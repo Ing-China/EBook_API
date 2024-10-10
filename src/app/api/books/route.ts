@@ -4,6 +4,7 @@ import path from "path";
 import { writeFile } from "fs/promises";
 import mongoose from "mongoose";
 import Book from "@/models/Book";
+import Author from "@/models/Author";
 
 export async function POST(request: Request) {
   await connectDB();
@@ -83,6 +84,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     await connectDB();
+    const authors = await Author.find();
 
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));

@@ -1,5 +1,5 @@
 import connectDB from "@/lib/mongodb";
-import BookType from "@/models/Booktype";
+import BookType from "@/models/BookType";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
