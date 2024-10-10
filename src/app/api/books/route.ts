@@ -85,6 +85,7 @@ export async function GET(request: Request) {
   try {
     await connectDB();
     const authors = await Author.find();
+    console.log(authors);
 
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));

@@ -11,6 +11,7 @@ export async function GET(request: Request) {
     await connectDB();
 
     const bookTypes = await BookType.find();
+    console.log(bookTypes);
 
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
